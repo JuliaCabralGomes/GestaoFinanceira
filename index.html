@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="CABRAL — Dashboard de gestão financeira e controle operacional."
+  />
+
+  <title>Financeiro • Cabral</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- ====================================== -->
+  <!-- SIDEBAR -->
+  <!-- ====================================== -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-top">
+
+      <div class="logo">
+
+        <h1>CABRAL</h1>
+
+        <span>Gestão Financeira</span>
+
+      </div>
+
+      <div class="header-actions">
+
+        <div class="executive-status">
+
+          <span class="status-dot"></span>
+
+          Sistema Operacional Estável
+
+        </div>
+
+        <div class="topbar-buttons">
+
+          <button
+            class="notification-btn"
+            id="notificationBtn"
+            aria-label="Notificações"
+            title="Notificações"
+          >
+
+            🔔
+
+            <span class="notification-dot"></span>
+
+          </button>
+
+          <button id="exportCSV">
+            Exportar CSV
+          </button>
+
+        </div>
+
+        <div class="executive-profile">
+
+          <div class="executive-avatar">
+            J
+          </div>
+
+          <div class="executive-info">
+
+            <strong>
+              Júlia Cabral Gomes
+            </strong>
+
+            <span>
+              CEO Operacional
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <nav>
+
+      <button class="nav-btn active">
+        <span>📊</span>
+        Dashboard
+      </button>
+
+      <button class="nav-btn">
+        <span>💰</span>
+        Financeiro
+      </button>
+
+      <button class="nav-btn">
+        <span>🧾</span>
+        Relatórios
+      </button>
+
+      <button class="nav-btn">
+        <span>⚙️</span>
+        Operacional
+      </button>
+
+    </nav>
+
+  </aside>
+
+
+  <!-- ====================================== -->
+  <!-- MAIN -->
+  <!-- ====================================== -->
+
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+      <div class="topbar-left">
+
+        <h2>Painel Financeiro</h2>
+
+        <p>
+          Controle operacional, fluxo de caixa,
+          previsões e gestão estratégica.
+        </p>
+
+      </div>
+
+      <div class="topbar-right">
+
+        <div class="search-box">
+
+          <span class="search-icon">
+            🔍
+          </span>
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Pesquisar transações..."
+          />
+
+        </div>
+
+        <div class="topbar-filters">
+
+          <select class="filter-select" id="monthFilter">
+
+            <option value="maio">
+              Maio 2026
+            </option>
+
+            <option value="abril">
+              Abril 2026
+            </option>
+
+            <option value="marco">
+              Março 2026
+            </option>
+
+          </select>
+
+          <select class="filter-select" id="typeFilter">
+
+            <option value="all">
+              Todas Operações
+            </option>
+
+            <option value="income">
+              Receitas
+            </option>
+
+            <option value="expense">
+              Despesas
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- ====================================== -->
+    <!-- ALERTAS -->
+    <!-- ====================================== -->
+
+    <section class="alerts-wrapper">
+
+      <div class="section-title">
+
+        <h2>
+          Alertas Operacionais
+        </h2>
+
+        <p>
+          Eventos críticos e indicadores do ciclo atual.
+        </p>
+
+      </div>
+
+      <div class="alerts-grid">
+
+        <div class="alert-card danger">
+
+          <div class="alert-icon">
+            !
+          </div>
+
+          <div>
+
+            <h3>
+              Custos Elevados
+            </h3>
+
+            <p>
+              Despesas operacionais subiram 12%
+              no último ciclo mensal.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="alert-card warning">
+
+          <div class="alert-icon">
+            !
+          </div>
+
+          <div>
+
+            <h3>
+              Manutenção Pendente
+            </h3>
+
+            <p>
+              Câmara fria precisa de revisão preventiva.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="alert-card neutral">
+
+          <div class="alert-icon">
+            ↗
+          </div>
+
+          <div>
+
+            <h3>
+              Delivery em Crescimento
+            </h3>
+
+            <p>
+              Pedidos online cresceram 18% este mês.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <div class="section-divider"></div>
+
+
+    <!-- ====================================== -->
+    <!-- CARDS PRINCIPAIS -->
+    <!-- ====================================== -->
+
+    <section class="cards">
+
+      <div class="card income">
+
+        <h3>
+          Receita Total
+        </h3>
+
+        <span id="incomeValue">
+          R$ 66.650,00
+        </span>
+
+        <div class="card-trend positive">
+          ↑ 12% este mês
+        </div>
+
+      </div>
+
+      <div class="card expense">
+
+        <h3>
+          Despesas Operacionais
+        </h3>
+
+        <span id="expenseValue">
+          R$ 50.549,00
+        </span>
+
+        <div class="card-trend negative">
+          ↑ 8% em custos
+        </div>
+
+      </div>
+
+      <div class="card balance">
+
+        <h3>
+          Saldo Operacional
+        </h3>
+
+        <span id="balanceValue">
+          R$ 16.101,00
+        </span>
+
+        <div class="card-trend positive">
+          ↑ Fluxo positivo
+        </div>
+
+      </div>
+
+      <div class="card prediction">
+
+        <h3>
+          Previsão de Manutenção
+        </h3>
+
+        <span id="predictionValue">
+          Revisão Estrutural
+        </span>
+
+        <div class="card-trend neutral-trend">
+          Próximos 30 dias
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================== -->
+    <!-- KPIs -->
+    <!-- ====================================== -->
+
+    <section class="cards secondary-cards">
+
+      <div class="card mini-card">
+
+        <h3>
+          Ticket Médio
+        </h3>
+
+        <span>
+          R$ 87,40
+        </span>
+
+      </div>
+
+      <div class="card mini-card">
+
+        <h3>
+          CMV
+        </h3>
+
+        <span>
+          32%
+        </span>
+
+      </div>
+
+      <div class="card mini-card">
+
+        <h3>
+          Delivery
+        </h3>
+
+        <span>
+          41%
+        </span>
+
+      </div>
+
+      <div class="card mini-card">
+
+        <h3>
+          Clientes/Mês
+        </h3>
+
+        <span>
+          2.480
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <div class="section-divider"></div>
+
+
+    <!-- ====================================== -->
+    <!-- DASHBOARD -->
+    <!-- ====================================== -->
+
+    <section class="dashboard-grid">
+
+      <!-- NOVA TRANSAÇÃO -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <h2>
+            Nova Transação
+          </h2>
+
+          <p>
+            Registro financeiro operacional.
+          </p>
+
+        </div>
+
+        <form id="transactionForm">
+
+          <input
+            type="text"
+            id="description"
+            placeholder="Descrição da transação"
+            required
+          />
+
+          <input
+            type="number"
+            id="amount"
+            placeholder="Valor"
+            min="0"
+            step="0.01"
+            required
+          />
+
+          <select id="category">
+
+            <option value="Atendimento">
+              Atendimento
+            </option>
+
+            <option value="Eventos">
+              Eventos
+            </option>
+
+            <option value="Bar">
+              Bar
+            </option>
+
+            <option value="Fornecedores">
+              Fornecedores
+            </option>
+
+            <option value="Estoque">
+              Estoque
+            </option>
+
+            <option value="RH">
+              RH
+            </option>
+
+            <option value="Infraestrutura">
+              Infraestrutura
+            </option>
+
+            <option value="Marketing">
+              Marketing
+            </option>
+
+            <option value="Manutenção">
+              Manutenção
+            </option>
+
+          </select>
+
+          <select id="type">
+
+            <option value="income">
+              Receita
+            </option>
+
+            <option value="expense">
+              Despesa
+            </option>
+
+          </select>
+
+          <button type="submit">
+            Adicionar Transação
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <!-- GRÁFICO -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <h2>
+            Distribuição Financeira
+          </h2>
+
+          <p>
+            Comparativo entre receitas e despesas.
+          </p>
+
+        </div>
+
+        <div class="chart-wrapper">
+
+          <canvas id="financeChart"></canvas>
+
+          <div class="chart-center">
+
+            <span>
+              Resultado Atual
+            </span>
+
+            <strong>
+              +18%
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================== -->
+    <!-- ANALYTICS -->
+    <!-- ====================================== -->
+
+    <section class="analytics">
+
+      <!-- METAS -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <h2>
+            Metas Financeiras
+          </h2>
+
+          <p>
+            Indicadores estratégicos.
+          </p>
+
+        </div>
+
+        <div class="goals-grid">
+
+          <div class="goal-card">
+
+            <div class="goal-header">
+
+              <span>
+                Reserva Operacional
+              </span>
+
+              <strong>
+                64%
+              </strong>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div
+                class="progress"
+                style="width: 64%;"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <div class="goal-card">
+
+            <div class="goal-header">
+
+              <span>
+                Redução de Custos
+              </span>
+
+              <strong>
+                38%
+              </strong>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div
+                class="progress secondary-progress"
+                style="width: 38%;"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- IA -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <h2>
+            Análise Inteligente
+          </h2>
+
+          <p>
+            Insights automatizados.
+          </p>
+
+        </div>
+
+        <div class="ai-analysis">
+
+          <p>
+            Fluxo financeiro estável. O delivery representa
+            uma parcela relevante da receita mensal e existem
+            previsões de manutenção estrutural que podem
+            impactar os próximos ciclos operacionais.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================== -->
+    <!-- TABELA -->
+    <!-- ====================================== -->
+
+    <section class="panel table-panel">
+
+      <div class="table-topbar">
+
+        <div>
+
+          <h3>
+            Últimas Movimentações
+          </h3>
+
+          <p>
+            Monitoramento financeiro em tempo real.
+          </p>
+
+        </div>
+
+        <button
+          class="refresh-btn"
+          id="refreshBtn"
+        >
+          Atualizar
+        </button>
+
+      </div>
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Descrição
+            </th>
+
+            <th>
+              Categoria
+            </th>
+
+            <th>
+              Tipo
+            </th>
+
+            <th>
+              Valor
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Ações
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="transactionList">
+
+          <tr>
+
+            <td>
+              Troca Câmara Fria
+            </td>
+
+            <td>
+              Manutenção
+            </td>
+
+            <td>
+              Despesa
+            </td>
+
+            <td>
+              R$ 12.500,00
+            </td>
+
+            <td>
+
+              <span class="status expense">
+                Saída
+              </span>
+
+            </td>
+
+            <td>
+
+              <button class="delete-btn">
+                Excluir
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+  </main>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
