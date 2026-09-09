@@ -23,13 +23,13 @@
 
 <body>
 
-  <!-- ====================================== -->
-  <!-- SIDEBAR -->
-  <!-- ====================================== -->
+  <div class="app-shell">
 
-  <aside class="sidebar">
+    <!-- ====================================== -->
+    <!-- SIDEBAR (vertical de verdade) -->
+    <!-- ====================================== -->
 
-    <div class="sidebar-top">
+    <aside class="sidebar">
 
       <div class="logo">
 
@@ -39,34 +39,37 @@
 
       </div>
 
-      <div class="header-actions">
+      <nav>
+
+        <button class="nav-btn active" data-view="dashboard">
+          <span>📊</span>
+          Dashboard
+        </button>
+
+        <button class="nav-btn" data-view="financeiro">
+          <span>💰</span>
+          Financeiro
+        </button>
+
+        <button class="nav-btn" data-view="relatorios">
+          <span>🧾</span>
+          Relatórios
+        </button>
+
+        <button class="nav-btn" data-view="operacional">
+          <span>⚙️</span>
+          Operacional
+        </button>
+
+      </nav>
+
+      <div class="sidebar-footer">
 
         <div class="executive-status">
 
           <span class="status-dot"></span>
 
           Sistema Operacional Estável
-
-        </div>
-
-        <div class="topbar-buttons">
-
-          <button
-            class="notification-btn"
-            id="notificationBtn"
-            aria-label="Notificações"
-            title="Notificações"
-          >
-
-            🔔
-
-            <span class="notification-dot"></span>
-
-          </button>
-
-          <button id="exportCSV">
-            Exportar CSV
-          </button>
 
         </div>
 
@@ -92,695 +95,544 @@
 
       </div>
 
-    </div>
-
-    <nav>
-
-      <button class="nav-btn active">
-        <span>📊</span>
-        Dashboard
-      </button>
-
-      <button class="nav-btn">
-        <span>💰</span>
-        Financeiro
-      </button>
-
-      <button class="nav-btn">
-        <span>🧾</span>
-        Relatórios
-      </button>
-
-      <button class="nav-btn">
-        <span>⚙️</span>
-        Operacional
-      </button>
-
-    </nav>
-
-  </aside>
-
-
-  <!-- ====================================== -->
-  <!-- MAIN -->
-  <!-- ====================================== -->
-
-  <main class="main-content">
-
-    <!-- TOPBAR -->
-
-    <header class="topbar">
-
-      <div class="topbar-left">
-
-        <h2>Painel Financeiro</h2>
-
-        <p>
-          Controle operacional, fluxo de caixa,
-          previsões e gestão estratégica.
-        </p>
-
-      </div>
-
-      <div class="topbar-right">
-
-        <div class="search-box">
-
-          <span class="search-icon">
-            🔍
-          </span>
-
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Pesquisar transações..."
-          />
-
-        </div>
-
-        <div class="topbar-filters">
-
-          <select class="filter-select" id="monthFilter">
-
-            <option value="maio">
-              Maio 2026
-            </option>
-
-            <option value="abril">
-              Abril 2026
-            </option>
-
-            <option value="marco">
-              Março 2026
-            </option>
-
-          </select>
-
-          <select class="filter-select" id="typeFilter">
-
-            <option value="all">
-              Todas Operações
-            </option>
-
-            <option value="income">
-              Receitas
-            </option>
-
-            <option value="expense">
-              Despesas
-            </option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-    </header>
+    </aside>
 
 
     <!-- ====================================== -->
-    <!-- ALERTAS -->
+    <!-- MAIN WRAPPER -->
     <!-- ====================================== -->
 
-    <section class="alerts-wrapper">
+    <div class="main-wrapper">
 
-      <div class="section-title">
+      <!-- TOPBAR -->
 
-        <h2>
-          Alertas Operacionais
-        </h2>
+      <header class="topbar">
 
-        <p>
-          Eventos críticos e indicadores do ciclo atual.
-        </p>
+        <div class="topbar-left">
 
-      </div>
-
-      <div class="alerts-grid">
-
-        <div class="alert-card danger">
-
-          <div class="alert-icon">
-            !
-          </div>
-
-          <div>
-
-            <h3>
-              Custos Elevados
-            </h3>
-
-            <p>
-              Despesas operacionais subiram 12%
-              no último ciclo mensal.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="alert-card warning">
-
-          <div class="alert-icon">
-            !
-          </div>
-
-          <div>
-
-            <h3>
-              Manutenção Pendente
-            </h3>
-
-            <p>
-              Câmara fria precisa de revisão preventiva.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="alert-card neutral">
-
-          <div class="alert-icon">
-            ↗
-          </div>
-
-          <div>
-
-            <h3>
-              Delivery em Crescimento
-            </h3>
-
-            <p>
-              Pedidos online cresceram 18% este mês.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <div class="section-divider"></div>
-
-
-    <!-- ====================================== -->
-    <!-- CARDS PRINCIPAIS -->
-    <!-- ====================================== -->
-
-    <section class="cards">
-
-      <div class="card income">
-
-        <h3>
-          Receita Total
-        </h3>
-
-        <span id="incomeValue">
-          R$ 66.650,00
-        </span>
-
-        <div class="card-trend positive">
-          ↑ 12% este mês
-        </div>
-
-      </div>
-
-      <div class="card expense">
-
-        <h3>
-          Despesas Operacionais
-        </h3>
-
-        <span id="expenseValue">
-          R$ 50.549,00
-        </span>
-
-        <div class="card-trend negative">
-          ↑ 8% em custos
-        </div>
-
-      </div>
-
-      <div class="card balance">
-
-        <h3>
-          Saldo Operacional
-        </h3>
-
-        <span id="balanceValue">
-          R$ 16.101,00
-        </span>
-
-        <div class="card-trend positive">
-          ↑ Fluxo positivo
-        </div>
-
-      </div>
-
-      <div class="card prediction">
-
-        <h3>
-          Previsão de Manutenção
-        </h3>
-
-        <span id="predictionValue">
-          Revisão Estrutural
-        </span>
-
-        <div class="card-trend neutral-trend">
-          Próximos 30 dias
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ====================================== -->
-    <!-- KPIs -->
-    <!-- ====================================== -->
-
-    <section class="cards secondary-cards">
-
-      <div class="card mini-card">
-
-        <h3>
-          Ticket Médio
-        </h3>
-
-        <span>
-          R$ 87,40
-        </span>
-
-      </div>
-
-      <div class="card mini-card">
-
-        <h3>
-          CMV
-        </h3>
-
-        <span>
-          32%
-        </span>
-
-      </div>
-
-      <div class="card mini-card">
-
-        <h3>
-          Delivery
-        </h3>
-
-        <span>
-          41%
-        </span>
-
-      </div>
-
-      <div class="card mini-card">
-
-        <h3>
-          Clientes/Mês
-        </h3>
-
-        <span>
-          2.480
-        </span>
-
-      </div>
-
-    </section>
-
-
-    <div class="section-divider"></div>
-
-
-    <!-- ====================================== -->
-    <!-- DASHBOARD -->
-    <!-- ====================================== -->
-
-    <section class="dashboard-grid">
-
-      <!-- NOVA TRANSAÇÃO -->
-
-      <div class="panel">
-
-        <div class="panel-header">
-
-          <h2>
-            Nova Transação
-          </h2>
+          <h2>Painel Financeiro</h2>
 
           <p>
-            Registro financeiro operacional.
+            Controle operacional, fluxo de caixa,
+            previsões e gestão estratégica.
           </p>
 
         </div>
 
-        <form id="transactionForm">
+        <div class="topbar-right">
 
-          <input
-            type="text"
-            id="description"
-            placeholder="Descrição da transação"
-            required
-          />
+          <div class="search-box">
 
-          <input
-            type="number"
-            id="amount"
-            placeholder="Valor"
-            min="0"
-            step="0.01"
-            required
-          />
-
-          <select id="category">
-
-            <option value="Atendimento">
-              Atendimento
-            </option>
-
-            <option value="Eventos">
-              Eventos
-            </option>
-
-            <option value="Bar">
-              Bar
-            </option>
-
-            <option value="Fornecedores">
-              Fornecedores
-            </option>
-
-            <option value="Estoque">
-              Estoque
-            </option>
-
-            <option value="RH">
-              RH
-            </option>
-
-            <option value="Infraestrutura">
-              Infraestrutura
-            </option>
-
-            <option value="Marketing">
-              Marketing
-            </option>
-
-            <option value="Manutenção">
-              Manutenção
-            </option>
-
-          </select>
-
-          <select id="type">
-
-            <option value="income">
-              Receita
-            </option>
-
-            <option value="expense">
-              Despesa
-            </option>
-
-          </select>
-
-          <button type="submit">
-            Adicionar Transação
-          </button>
-
-        </form>
-
-      </div>
-
-
-      <!-- GRÁFICO -->
-
-      <div class="panel">
-
-        <div class="panel-header">
-
-          <h2>
-            Distribuição Financeira
-          </h2>
-
-          <p>
-            Comparativo entre receitas e despesas.
-          </p>
-
-        </div>
-
-        <div class="chart-wrapper">
-
-          <canvas id="financeChart"></canvas>
-
-          <div class="chart-center">
-
-            <span>
-              Resultado Atual
+            <span class="search-icon">
+              🔍
             </span>
 
-            <strong>
-              +18%
-            </strong>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Pesquisar transações..."
+              aria-label="Pesquisar transações"
+            />
 
           </div>
 
-        </div>
+          <div class="topbar-filters">
 
-      </div>
+            <select
+              class="filter-select"
+              id="monthFilter"
+              aria-label="Filtrar por mês"
+            ></select>
 
-    </section>
+            <select
+              class="filter-select"
+              id="typeFilter"
+              aria-label="Filtrar por tipo de operação"
+            >
 
+              <option value="all">
+                Todas Operações
+              </option>
 
-    <!-- ====================================== -->
-    <!-- ANALYTICS -->
-    <!-- ====================================== -->
+              <option value="income">
+                Receitas
+              </option>
 
-    <section class="analytics">
+              <option value="expense">
+                Despesas
+              </option>
 
-      <!-- METAS -->
-
-      <div class="panel">
-
-        <div class="panel-header">
-
-          <h2>
-            Metas Financeiras
-          </h2>
-
-          <p>
-            Indicadores estratégicos.
-          </p>
-
-        </div>
-
-        <div class="goals-grid">
-
-          <div class="goal-card">
-
-            <div class="goal-header">
-
-              <span>
-                Reserva Operacional
-              </span>
-
-              <strong>
-                64%
-              </strong>
-
-            </div>
-
-            <div class="progress-bar">
-
-              <div
-                class="progress"
-                style="width: 64%;"
-              ></div>
-
-            </div>
+            </select>
 
           </div>
 
+          <div class="notification-wrapper">
 
-          <div class="goal-card">
+            <button
+              class="notification-btn"
+              id="notificationBtn"
+              aria-label="Notificações"
+              title="Notificações"
+            >
 
-            <div class="goal-header">
+              🔔
 
-              <span>
-                Redução de Custos
-              </span>
+              <span class="notification-dot hidden" id="notificationDot"></span>
 
-              <strong>
-                38%
-              </strong>
+            </button>
 
-            </div>
+            <div class="notification-panel hidden" id="notificationPanel">
 
-            <div class="progress-bar">
+              <div class="notification-panel-header">
+                Alertas Operacionais
+              </div>
 
-              <div
-                class="progress secondary-progress"
-                style="width: 38%;"
-              ></div>
+              <div id="notificationList" class="notification-list"></div>
 
             </div>
 
           </div>
 
-        </div>
-
-      </div>
-
-
-      <!-- IA -->
-
-      <div class="panel">
-
-        <div class="panel-header">
-
-          <h2>
-            Análise Inteligente
-          </h2>
-
-          <p>
-            Insights automatizados.
-          </p>
+          <button id="exportCSV">
+            Exportar CSV
+          </button>
 
         </div>
 
-        <div class="ai-analysis">
-
-          <p>
-            Fluxo financeiro estável. O delivery representa
-            uma parcela relevante da receita mensal e existem
-            previsões de manutenção estrutural que podem
-            impactar os próximos ciclos operacionais.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
+      </header>
 
 
-    <!-- ====================================== -->
-    <!-- TABELA -->
-    <!-- ====================================== -->
+      <main class="main-content">
 
-    <section class="panel table-panel">
+        <!-- ====================================== -->
+        <!-- ALERTAS -->
+        <!-- ====================================== -->
 
-      <div class="table-topbar">
+        <section class="alerts-wrapper" data-views="dashboard operacional">
 
-        <div>
+          <div class="section-title">
 
-          <h3>
-            Últimas Movimentações
-          </h3>
+            <h2>
+              Alertas Operacionais
+            </h2>
 
-          <p>
-            Monitoramento financeiro em tempo real.
-          </p>
+            <p>
+              Eventos críticos e indicadores do ciclo atual.
+            </p>
 
-        </div>
+          </div>
 
-        <button
-          class="refresh-btn"
-          id="refreshBtn"
-        >
-          Atualizar
-        </button>
+          <div class="alerts-grid" id="alertsGrid"></div>
 
-      </div>
+        </section>
 
-      <table>
 
-        <thead>
+        <div class="section-divider"></div>
 
-          <tr>
 
-            <th>
-              Descrição
-            </th>
+        <!-- ====================================== -->
+        <!-- CARDS PRINCIPAIS -->
+        <!-- ====================================== -->
 
-            <th>
-              Categoria
-            </th>
+        <section class="cards" data-views="dashboard financeiro">
 
-            <th>
-              Tipo
-            </th>
+          <div class="card income">
 
-            <th>
-              Valor
-            </th>
+            <h3>
+              Receita Total
+            </h3>
 
-            <th>
-              Status
-            </th>
+            <span id="incomeValue">
+              R$ 0,00
+            </span>
 
-            <th>
-              Ações
-            </th>
+            <div class="card-trend positive" id="incomeTrend"></div>
 
-          </tr>
+          </div>
 
-        </thead>
+          <div class="card expense">
 
-        <tbody id="transactionList">
+            <h3>
+              Despesas Operacionais
+            </h3>
 
-          <tr>
+            <span id="expenseValue">
+              R$ 0,00
+            </span>
 
-            <td>
-              Troca Câmara Fria
-            </td>
+            <div class="card-trend negative" id="expenseTrend"></div>
 
-            <td>
-              Manutenção
-            </td>
+          </div>
 
-            <td>
-              Despesa
-            </td>
+          <div class="card balance">
 
-            <td>
-              R$ 12.500,00
-            </td>
+            <h3>
+              Saldo Operacional
+            </h3>
 
-            <td>
+            <span id="balanceValue">
+              R$ 0,00
+            </span>
 
-              <span class="status expense">
-                Saída
-              </span>
+            <div class="card-trend neutral-trend" id="balanceTrend"></div>
 
-            </td>
+          </div>
 
-            <td>
+          <div class="card prediction">
 
-              <button class="delete-btn">
-                Excluir
+            <h3>
+              Previsão de Manutenção
+            </h3>
+
+            <span id="predictionValue">
+              —
+            </span>
+
+            <div class="card-trend neutral-trend" id="predictionTrend"></div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- KPIs -->
+        <!-- ====================================== -->
+
+        <section class="cards secondary-cards" data-views="dashboard operacional">
+
+          <div class="card mini-card">
+
+            <h3>
+              Ticket Médio
+            </h3>
+
+            <span id="ticketMedioValue">
+              R$ 0,00
+            </span>
+
+          </div>
+
+          <div class="card mini-card">
+
+            <h3>
+              CMV
+            </h3>
+
+            <span id="cmvValue">
+              0%
+            </span>
+
+          </div>
+
+          <div class="card mini-card">
+
+            <h3>
+              Delivery
+            </h3>
+
+            <span id="deliveryValue">
+              0%
+            </span>
+
+          </div>
+
+          <div class="card mini-card">
+
+            <h3>
+              Transações no Período
+            </h3>
+
+            <span id="transactionsCountValue">
+              0
+            </span>
+
+          </div>
+
+        </section>
+
+
+        <div class="section-divider"></div>
+
+
+        <!-- ====================================== -->
+        <!-- DASHBOARD -->
+        <!-- ====================================== -->
+
+        <section class="dashboard-grid">
+
+          <!-- NOVA TRANSAÇÃO -->
+
+          <div class="panel" data-views="dashboard financeiro">
+
+            <div class="panel-header">
+
+              <h2>
+                Nova Transação
+              </h2>
+
+              <p>
+                Registro financeiro operacional.
+              </p>
+
+            </div>
+
+            <form id="transactionForm">
+
+              <input
+                type="text"
+                id="description"
+                placeholder="Descrição da transação"
+                required
+              />
+
+              <input
+                type="number"
+                id="amount"
+                placeholder="Valor"
+                min="0"
+                step="0.01"
+                required
+              />
+
+              <input
+                type="date"
+                id="date"
+                required
+              />
+
+              <select id="category">
+
+                <option value="Atendimento">
+                  Atendimento
+                </option>
+
+                <option value="Delivery">
+                  Delivery
+                </option>
+
+                <option value="Eventos">
+                  Eventos
+                </option>
+
+                <option value="Bar">
+                  Bar
+                </option>
+
+                <option value="Fornecedores">
+                  Fornecedores
+                </option>
+
+                <option value="Estoque">
+                  Estoque
+                </option>
+
+                <option value="RH">
+                  RH
+                </option>
+
+                <option value="Infraestrutura">
+                  Infraestrutura
+                </option>
+
+                <option value="Marketing">
+                  Marketing
+                </option>
+
+                <option value="Manutenção">
+                  Manutenção
+                </option>
+
+              </select>
+
+              <select id="type">
+
+                <option value="income">
+                  Receita
+                </option>
+
+                <option value="expense">
+                  Despesa
+                </option>
+
+              </select>
+
+              <button type="submit">
+                Adicionar Transação
               </button>
 
-            </td>
+            </form>
 
-          </tr>
+          </div>
 
-        </tbody>
 
-      </table>
+          <!-- GRÁFICO -->
 
-    </section>
+          <div class="panel" data-views="dashboard relatorios">
 
-  </main>
+            <div class="panel-header">
+
+              <h2>
+                Distribuição Financeira
+              </h2>
+
+              <p>
+                Comparativo entre receitas e despesas.
+              </p>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+              <canvas id="financeChart"></canvas>
+
+              <div class="chart-center">
+
+                <span>
+                  Resultado do Período
+                </span>
+
+                <strong id="chartResultLabel">
+                  —
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- ANALYTICS -->
+        <!-- ====================================== -->
+
+        <section class="analytics">
+
+          <!-- METAS -->
+
+          <div class="panel" data-views="dashboard relatorios">
+
+            <div class="panel-header">
+
+              <h2>
+                Metas Financeiras
+              </h2>
+
+              <p>
+                Clique no valor de cada meta pra ajustar o alvo.
+              </p>
+
+            </div>
+
+            <div class="goals-grid" id="goalsGrid"></div>
+
+          </div>
+
+
+          <!-- IA -->
+
+          <div class="panel" data-views="dashboard relatorios">
+
+            <div class="panel-header">
+
+              <h2>
+                Análise Inteligente
+              </h2>
+
+              <p>
+                Insights gerados a partir dos dados atuais.
+              </p>
+
+            </div>
+
+            <div class="ai-analysis" id="aiAnalysis"></div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ====================================== -->
+        <!-- TABELA -->
+        <!-- ====================================== -->
+
+        <section class="panel table-panel" data-views="dashboard financeiro">
+
+          <div class="table-topbar">
+
+            <div>
+
+              <h3>
+                Últimas Movimentações
+              </h3>
+
+              <p>
+                Monitoramento financeiro em tempo real.
+              </p>
+
+            </div>
+
+            <button
+              class="refresh-btn"
+              id="refreshBtn"
+            >
+              Atualizar
+            </button>
+
+          </div>
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Data
+                </th>
+
+                <th>
+                  Descrição
+                </th>
+
+                <th>
+                  Categoria
+                </th>
+
+                <th>
+                  Tipo
+                </th>
+
+                <th>
+                  Valor
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Ações
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="transactionList"></tbody>
+
+          </table>
+
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
 
 
   <script src="script.js"></script>
