@@ -216,7 +216,7 @@
               Alertas Operacionais
             </h2>
 
-            <p>
+            <p id="alertsSubtitle">
               Eventos críticos e indicadores do ciclo atual.
             </p>
 
@@ -227,16 +227,16 @@
         </section>
 
 
-        <div class="section-divider"></div>
+        <div class="section-divider" data-views="dashboard operacional"></div>
 
 
         <!-- ====================================== -->
         <!-- CARDS PRINCIPAIS -->
         <!-- ====================================== -->
 
-        <section class="cards" data-views="dashboard financeiro">
+        <section class="cards" data-views="dashboard financeiro operacional">
 
-          <div class="card income">
+          <div class="card income" data-views="dashboard financeiro">
 
             <h3>
               Receita Total
@@ -250,7 +250,7 @@
 
           </div>
 
-          <div class="card expense">
+          <div class="card expense" data-views="dashboard financeiro">
 
             <h3>
               Despesas Operacionais
@@ -264,7 +264,7 @@
 
           </div>
 
-          <div class="card balance">
+          <div class="card balance" data-views="dashboard financeiro">
 
             <h3>
               Saldo Operacional
@@ -278,7 +278,7 @@
 
           </div>
 
-          <div class="card prediction">
+          <div class="card prediction" data-views="dashboard operacional">
 
             <h3>
               Previsão de Manutenção
@@ -299,9 +299,9 @@
         <!-- KPIs -->
         <!-- ====================================== -->
 
-        <section class="cards secondary-cards" data-views="dashboard operacional">
+        <section class="cards secondary-cards" data-views="relatorios operacional">
 
-          <div class="card mini-card">
+          <div class="card mini-card" data-views="relatorios">
 
             <h3>
               Ticket Médio
@@ -313,7 +313,7 @@
 
           </div>
 
-          <div class="card mini-card">
+          <div class="card mini-card" data-views="operacional">
 
             <h3>
               CMV
@@ -325,7 +325,7 @@
 
           </div>
 
-          <div class="card mini-card">
+          <div class="card mini-card" data-views="operacional">
 
             <h3>
               Delivery
@@ -337,7 +337,7 @@
 
           </div>
 
-          <div class="card mini-card">
+          <div class="card mini-card" data-views="relatorios">
 
             <h3>
               Transações no Período
@@ -352,18 +352,18 @@
         </section>
 
 
-        <div class="section-divider"></div>
+        <div class="section-divider" data-views="dashboard financeiro relatorios"></div>
 
 
         <!-- ====================================== -->
         <!-- DASHBOARD -->
         <!-- ====================================== -->
 
-        <section class="dashboard-grid">
+        <section class="dashboard-grid" data-views="dashboard financeiro relatorios">
 
           <!-- NOVA TRANSAÇÃO -->
 
-          <div class="panel" data-views="dashboard financeiro">
+          <div class="panel" data-views="financeiro">
 
             <div class="panel-header">
 
@@ -509,11 +509,11 @@
         <!-- ANALYTICS -->
         <!-- ====================================== -->
 
-        <section class="analytics">
+        <section class="analytics" data-views="relatorios">
 
           <!-- METAS -->
 
-          <div class="panel" data-views="dashboard relatorios">
+          <div class="panel" data-views="relatorios">
 
             <div class="panel-header">
 
@@ -534,7 +534,7 @@
 
           <!-- IA -->
 
-          <div class="panel" data-views="dashboard relatorios">
+          <div class="panel" data-views="relatorios">
 
             <div class="panel-header">
 
@@ -565,11 +565,11 @@
 
             <div>
 
-              <h3>
+              <h3 id="tableTitle">
                 Últimas Movimentações
               </h3>
 
-              <p>
+              <p id="tableSubtitle">
                 Monitoramento financeiro em tempo real.
               </p>
 

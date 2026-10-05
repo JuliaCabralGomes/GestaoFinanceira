@@ -45,8 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const chartResultLabel = document.getElementById("chartResultLabel");
 
+  const alertsSubtitle = document.getElementById("alertsSubtitle");
+  const tableTitle = document.getElementById("tableTitle");
+  const tableSubtitle = document.getElementById("tableSubtitle");
+
   const navButtons = document.querySelectorAll(".nav-btn");
   const viewSections = document.querySelectorAll("[data-views]");
+  const mainContent = document.querySelector(".main-content");
+  const topbarTitle = document.querySelector(".topbar-left h2");
+  const topbarSubtitle = document.querySelector(".topbar-left p");
 
   // ======================================
   // DADOS INICIAIS
@@ -84,6 +91,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectedMonth = "all";
   let currentView = "dashboard";
+
+  // Na visão geral, alertas e movimentações aparecem resumidos
+  const DASHBOARD_ALERTS_LIMIT = 3;
+  const DASHBOARD_TRANSACTIONS_LIMIT = 5;
+
+  const ALERT_SEVERITY = { danger: 0, warning: 1, neutral: 2, positive: 3 };
+
+  const VIEW_META = {
+    dashboard: {
+      title: "Painel Financeiro",
+      subtitle: "Visão geral: resultado do período, alertas em destaque e últimas movimentações."
+    },
+    financeiro: {
+      title: "Financeiro",
+      subtitle: "Registro de transações, receitas, despesas, saldo e histórico completo."
+    },
+    relatorios: {
+      title: "Relatórios",
+      subtitle: "Distribuição financeira, metas, análise inteligente e indicadores."
+    },
+    operacional: {
+      title: "Operacional",
+      subtitle: "Alertas operacionais, previsão de manutenção e KPIs da operação."
+    }
+  };
 
   // ======================================
   // FORMATAÇÃO
@@ -497,7 +529,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const alerts = computeAlerts();
 
-    alertsGrid.innerHTML = alerts.map(renderAlertCard).join("");
+    const isSummary = currentView === "dashboard";
+
+    const visibleAlerts = isSummary
+      ? [...alerts]
+        .sort((a, b) => ALERT_SEVERITY[a.type] - ALERT_SEVERITY[b.type])
+        .slice(0, DASHBOARD_ALERTS_LIMIT)
+      : alerts;
+
+    alertsGrid.innerHTML = visibleAlerts.map(renderAlertCard).join("");
+
+    alertsSubtitle.textContent = isSummary
+      ? "Resumo dos alertas mais relevantes. Veja todos em Operacional."
+      : "Eventos críticos e indicadores do ciclo atual.";
 
     // O painel de notificações reaproveita os mesmos alertas, sempre em sincronia
     const activeAlerts = alerts.filter(alert => alert.type !== "positive");
@@ -695,8 +739,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderTransactions() {
 
-    const filtered = getFilteredTransactions()
+    const isSummary = currentView === "dashboard";
+
+    tableTitle.textContent = isSummary ? "Últimas Movimentações" : "Movimentações";
+    tableSubtitle.textContent = isSummary
+      ? `As ${DASHBOARD_TRANSACTIONS_LIMIT} transações mais recentes. Histórico completo em Financeiro.`
+      : "Histórico completo: pesquise, filtre, exporte e exclua transações.";
+
+    const sorted = getFilteredTransactions()
       .sort((a, b) => b.date.localeCompare(a.date));
+
+    const filtered = isSummary
+      ? sorted.slice(0, DASHBOARD_TRANSACTIONS_LIMIT)
+      : sorted;
 
     transactionList.innerHTML = "";
 
@@ -933,21 +988,68 @@ document.addEventListener("DOMContentLoaded", () => {
   // NAVEGAÇÃO ENTRE VISÕES
   // ======================================
 
+  function applyView(view, { scrollToTop = true } = {}) {
+
+    currentView = VIEW_META[view] ? view : "dashboard";
+
+    navButtons.forEach(btn => {
+
+      const isActive = btn.dataset.view === currentView;
+
+      btn.classList.toggle("active", isActive);
+
+      if (isActive) {
+        btn.setAttribute("aria-current", "page");
+      } else {
+        btn.removeAttribute("aria-current");
+      }
+
+    });
+
+    viewSections.forEach(section => {
+
+      const views = section.dataset.views.split(" ");
+
+      section.classList.toggle("hidden", !views.includes(currentView));
+
+    });
+
+    const meta = VIEW_META[currentView];
+
+    topbarTitle.textContent = meta.title;
+    topbarSubtitle.textContent = meta.subtitle;
+
+    // Alertas e tabela mudam entre resumo (dashboard) e completo
+    renderTransactions();
+    updateAlerts();
+
+    // O gráfico pode ter sido (re)criado enquanto estava escondido
+    if (financeChart && !financeChart.canvas.closest(".hidden")) {
+
+      requestAnimationFrame(() => {
+
+        if (financeChart) {
+          financeChart.resize();
+        }
+
+      });
+
+    }
+
+    if (scrollToTop) {
+
+      mainContent.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: "instant" });
+
+    }
+
+  }
+
   navButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-      currentView = button.dataset.view;
-
-      navButtons.forEach(btn => btn.classList.toggle("active", btn === button));
-
-      viewSections.forEach(section => {
-
-        const views = section.dataset.views.split(" ");
-
-        section.classList.toggle("hidden", !views.includes(currentView));
-
-      });
+      applyView(button.dataset.view);
 
     });
 
@@ -1033,5 +1135,6 @@ document.addEventListener("DOMContentLoaded", () => {
   populateMonthFilter();
   renderTransactions();
   updateDashboard();
+  applyView(currentView, { scrollToTop: false });
 
 });
