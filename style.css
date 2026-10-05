@@ -1062,6 +1062,8 @@ nav {
 
   transition: var(--transition);
 
+  container-type: inline-size;
+
 }
 
 .card::before {
@@ -1122,11 +1124,16 @@ nav {
 
   font-size: 2.3rem;
 
+  /* Acompanha a largura do card pra valores longos não serem cortados */
+  font-size: clamp(1.4rem, 12.5cqi, 2.3rem);
+
   font-weight: 900;
 
   line-height: 1.2;
 
   display: block;
+
+  overflow-wrap: anywhere;
 
 }
 
@@ -1163,6 +1170,8 @@ nav {
 .secondary-cards .card span {
 
   font-size: 1.8rem;
+
+  font-size: clamp(1.3rem, 11cqi, 1.8rem);
 
 }
 
@@ -1843,7 +1852,7 @@ td {
 
   .card span {
 
-    font-size: 1.9rem;
+    font-size: clamp(1.4rem, 12.5cqi, 1.9rem);
 
   }
 
